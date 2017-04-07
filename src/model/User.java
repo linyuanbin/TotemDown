@@ -102,6 +102,15 @@ public class User {
 	public void setUserHeadPortr(String userHeadPortr) {
 		UserHeadPortr = userHeadPortr;
 	}
+
+	@Override
+	public String toString() {
+		return "User [UserID=" + UserID + ", UserName=" + UserName + ", UserTel=" + UserTel + ", UserEmail=" + UserEmail
+				+ ", UserPassword=" + UserPassword + ", UserNickName=" + UserNickName + ", UserSex=" + UserSex
+				+ ", UserBirthday=" + UserBirthday + ", UserMajor=" + UserMajor + ", UserIntegral=" + UserIntegral
+				+ ", UserUnderWrite=" + UserUnderWrite + ", UserHobby=" + UserHobby + ", UserHeadPortr=" + UserHeadPortr
+				+ "]";
+	}
 	
 	
 

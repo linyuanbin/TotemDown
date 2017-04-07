@@ -17,21 +17,32 @@ public class UserImplement implements UserDao {
 
 	@Override
 	public boolean register(User u) { // 初次登入添加用户
-
-		u.setUserID(new Date()+RandomString.getRandomString(5)); //随机产生用户ID
 		Session session = SessionAnnotation.getSession(); 
+		if(u.getUserTel()!=null){  //在完成注册之前确定该手机号是否已经注册
+			String sql="select UserID from User where UserTel='"+u.getUserTel()+"'";
+			session.beginTransaction();
+			List list=session.createQuery(sql).list();
+			if(!list.isEmpty()){
+			session.getTransaction().commit();
+			SessionAnnotation.closeSession();
+			return false;
+		      }else{
+		u.setUserID(new Date()+RandomString.getRandomString(5)); //随机产生用户ID
 		try { 
-			session.beginTransaction();  
+			//session.beginTransaction();  
 			session.save(u); 
 			session.flush(); 
 			session.getTransaction().commit();  
 			SessionAnnotation.closeSession();  
-			return true;
+			return true;  
 
 		} catch (Exception e) {
 			System.out.println(e);
 			return false;
 		}
+		}//else
+		}//if
+		return false;
 	}
 
 	@Override
@@ -75,23 +86,24 @@ public class UserImplement implements UserDao {
 		sql="delete from User where UserID='"+UserId+"'";
 		Query query=session.createQuery(sql);
 		query.executeUpdate();
-		session.getTransaction().commit();
-		SessionAnnotation.closeSession();
-		return true;
-	}
+		session.getTransaction().commit(); 
+		SessionAnnotation.closeSession(); 
+		return true; 
+	} 
 
 	@Override
 	public void updateUser(User u) { //更新
+		if(senseUser(u.getUserID())){ //如果用户存在则更新
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
 		session.update(u);
 		 session.getTransaction().commit(); 
 		 SessionAnnotation.closeSession();
+		}
 	}
-
 	
 	@Override
-	public User selectUser(String UserName) {  //用户是否存在
+	public User selectUser(String UserName) {  //查找用户     
 		Session session=SessionAnnotation.getSession();
 		String sql;
 		if(ValidatorUserNameUtil.isEmail(UserName)){
@@ -100,7 +112,7 @@ public class UserImplement implements UserDao {
 			sql="select UserID from User where UserTel='"+UserName+"'";
 	
 		}else{
-			sql="select UserID from User where UserName='"+UserName+"'";
+			sql="select UserID from User where UserName='"+UserName+"'"; 
 		}
 		session.beginTransaction();
 		List list=session.createQuery(sql).list();
@@ -115,7 +127,7 @@ public class UserImplement implements UserDao {
 	}
 
 	@Override
-	public boolean senseUser(String UserID) {
+	public boolean senseUser(String UserID) { //判定用户是否存在
 		Session session=SessionAnnotation.getSession();
 		String sql;
 		sql="select UserID from User where UserID='"+UserID+"'";
@@ -131,8 +143,13 @@ public class UserImplement implements UserDao {
 
 	@Override
 	public User showUser(String UserID) {
-		
-		return null;
+		Session session=SessionAnnotation.getSession();
+		session.beginTransaction();
+		User user=(User)session.get(User.class,UserID);
+		session.getTransaction().commit();
+		session.flush();
+		SessionAnnotation.closeSession();
+		return user;
 	}
 	
 	
