@@ -15,7 +15,7 @@ public interface UserDao {
 	public boolean senseUser(String UserID); 
 	//展现用户
 	public User showUser(String UserID);
-	
+	public String getUserID(String UserName);
 	
 	
 	

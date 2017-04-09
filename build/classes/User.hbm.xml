@@ -35,7 +35,7 @@
         <property name="UserIntegral" type="int">
             <column name="USERINTEGRAL" />
         </property>
-        <property name="UserUnderWrite" type="java.lang.String">
+        <property name="UserUnderWrite" type="java.lang.String"> 
             <column name="USERUNDERWRITE" />
         </property>
         <property name="UserHobby" type="java.lang.String">
@@ -44,5 +44,11 @@
         <property name="UserHeadPortr" type="java.lang.String">
             <column name="USERHEADPORTR" />
         </property>
+        
+        <!-- 多对多映射 -->
+        <!-- <set name="picture" table="mark"  cascade="all" inverse="true">
+        <key column="RUSERID"></key>
+        <many-to-many class="model.Picture" column="RPICTUREID"></many-to-many>
+        </set> -->
     </class>
 </hibernate-mapping>

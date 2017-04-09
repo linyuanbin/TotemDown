@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.mysql.jdbc.Blob;
 
@@ -19,6 +21,8 @@ public class User {
 	private String UserUnderWrite;//签名
 	private String UserHobby; //爱好
 	private String UserHeadPortr;//用户头像
+	//存储多对象图片的数组set
+	private Set<Picture> pictures=new HashSet<Picture>();
 	//private String User_WeChat; //微信号
 
 	
@@ -101,6 +105,14 @@ public class User {
 	}
 	public void setUserHeadPortr(String userHeadPortr) {
 		UserHeadPortr = userHeadPortr;
+	}
+
+	public Set<Picture> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(Set<Picture> pictures) {
+		this.pictures = pictures;
 	}
 
 	@Override

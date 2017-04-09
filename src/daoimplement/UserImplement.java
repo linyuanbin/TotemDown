@@ -103,7 +103,7 @@ public class UserImplement implements UserDao {
 	}
 	
 	@Override
-	public User selectUser(String UserName) {  //查找用户     
+	public User selectUser(String UserName) {  //查找用户     该方法有点bug
 		Session session=SessionAnnotation.getSession();
 		String sql;
 		if(ValidatorUserNameUtil.isEmail(UserName)){
@@ -151,6 +151,32 @@ public class UserImplement implements UserDao {
 		SessionAnnotation.closeSession();
 		return user;
 	}
+
+	@Override
+	public String getUserID(String UserName) {
+		Session session=SessionAnnotation.getSession();
+		String sql;
+		if(ValidatorUserNameUtil.isEmail(UserName)){
+			sql="select UserID from User where UserEmail='"+UserName+"'";
+		}else if(ValidatorUserNameUtil.isMobile(UserName)){
+			sql="select UserID from User where UserTel='"+UserName+"'";
+	
+		}else{
+			sql="select UserID from User where UserName='"+UserName+"'"; 
+		}
+		session.beginTransaction();
+		//List list=session.createQuery(sql).list();
+		String userid=session.createQuery(sql).toString();
+		if(userid.isEmpty()){
+			SessionAnnotation.closeSession();
+			return null;
+		}else{
+			return userid;
+		}
+	}
+	
+	
+	
 	
 	
 

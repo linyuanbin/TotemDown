@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-6 18:21:06 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-4-9 8:50:08 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="model.User" table="USER" >
+    <class name="model.User" table="USER">
         <id name="UserID" type="java.lang.String">
             <column name="USERID" />
             <generator class="assigned" />
@@ -12,13 +12,13 @@
             <column name="USERNAME" />
         </property>
         <property name="UserTel" type="java.lang.String">
-            <column name="USERTEL" />
+            <column name="USERTEL" unique="true"/>
         </property>
         <property name="UserEmail" type="java.lang.String">
-            <column name="USEREMAIL" />
+            <column name="USEREMAIL"  />
         </property>
         <property name="UserPassword" type="java.lang.String">
-            <column name="USERPASSWORD" not-null="true"/>
+            <column name="USERPASSWORD" />
         </property>
         <property name="UserNickName" type="java.lang.String">
             <column name="USERNICKNAME" />
@@ -35,7 +35,7 @@
         <property name="UserIntegral" type="int">
             <column name="USERINTEGRAL" />
         </property>
-        <property name="UserUnderWrite" type="java.lang.String"> 
+        <property name="UserUnderWrite" type="java.lang.String">
             <column name="USERUNDERWRITE" />
         </property>
         <property name="UserHobby" type="java.lang.String">
@@ -44,7 +44,11 @@
         <property name="UserHeadPortr" type="java.lang.String">
             <column name="USERHEADPORTR" />
         </property>
-        
+        <set name="pictures" table="MARK" cascade="all" lazy="false">
+            <key><column name="RUSERID" /></key>
+            <many-to-many class="model.Picture"  column="RPID" />
+        </set>
+        <!-- inverse表被动一方若置为true则表示关联关系又对方来维护   lazy表示是否延迟加载       cascade表示在操作时同时对关联表更新  -->
         <!-- 多对多映射 -->
         <!-- <set name="picture" table="mark"  cascade="all" inverse="true">
         <key column="RUSERID"></key>
