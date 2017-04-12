@@ -24,8 +24,8 @@ public class TestUser {
 	public void testuser() throws ParseException{
 		
 		UserDao d=new UserImplement(); 
-		/* //Ä£·Â×¢²á
-		User u=new User();
+		 //Ä£·Â×¢²á
+	/*	User u=new User();
 		u.setUserName("ÍøåÈ");
 		u.setUserTel("13244237897");
 		u.setUserBirthday(SimpleDateFormatUtil.getSimpleDateFormat("1996-10-1"));
@@ -36,8 +36,8 @@ public class TestUser {
 			System.out.println("YES");
 		}else{
 			System.out.println("NO");
-		}
-		*/
+		}*/
+		
 		//System.out.println("µÇÂ¼Çé¿ö:"+d.login("13244237695", "666666")); //Ä£·ÂµÇÂ¼
 		
 		/*
@@ -103,33 +103,51 @@ public class TestUser {
 	    
 		Picture p2=new Picture();
 		p2.setPID(new Date()+RandomString.getRandomString(5));
-	    p2.setPName("ÒÂ·þ");	
-	    p2.setPAddress("D:\\picture\\wwww.jpg");
+	    p2.setPName("¹ã³¡");	
+	    p2.setPAddress("D:\\picture\\wwpp.jpg");
 		
 	    u1.getPictures().add(p1);
 	    u1.getPictures().add(p2);
 	    u2.getPictures().add(p1);
-	     //session.save(u1);
-	    d.register(u1);
-	    d.register(u2);
+	    d.register(u1); //×¢²á
+	    d.register(u2);//×¢²á
+*/	    
 	    
-	    u2.getPictures().add(p2); 
-		System.out.println("picture"); 
-	    String uid=d.getUserID("13244236888"); 
-	    User u3=d.showUser("Sun Apr 09 09:50:20 CST 2017DlLDg");  
-	    //User u3=d.showUser(uid); 
-	    //System.out.println(uid); 
-	    u3.getPictures().add(p2); 
-	    d.updateUser(u3); 
-	    Set<Picture> ss = u3.getPictures(); 
-		System.out.println("picture"); 
-	    for (Picture picture : ss) { 
-			System.out.println(picture); 
-			System.out.println(picture.getPAddress()+" "+picture.getPName()); 
-		}*/
+//		
+		Picture p2=new Picture();
+		p2.setPID(new Date()+RandomString.getRandomString(5));
+	    p2.setPName("shijia");	
+	    p2.setPAddress("D:\\picture\\wwpp.jpg"); 
+		User u2=d.showUser("Mon Apr 10 21:27:04 CST 2017F596m"); 
+		if(u2.getPictures()==null){
+			System.out.println("yes");
+		}else{
+			System.out.println("no");
+		}
+		System.out.println(u2.getUserName());
+		System.out.println(u2.getPictures());
+		u2.getPictures().add(p2);
+	    System.out.println(u2.getUserEmail()+"ÓÊ¼þ");
+	    d.updateUser(u2);
+	    System.out.println(u2.getUserMajor()+"¹¤×÷");
+	    
+//	    
+//		System.out.println("picture");     //¹ØÁª±í²éÑ¯
+//	    //String uid=d.getUserID("13244236888"); 
+//	    User u3=d.showUser("Mon Apr 10 18:23:42 CST 2017d5YGb");  
+//	    //User u3=d.showUser(uid); 
+//	    //System.out.println(uid); 
+//	    Set<Picture> ss = u3.getPictures(); 
+//		System.out.println("picture"); 
+//	    for (Picture picture : ss) { 
+//			System.out.println(picture); 
+//			System.out.println(picture.getPAddress()+" "+picture.getPName()); 
+//		}
+//		
+	    
+	    
 		
-		
-		System.out.println(d.deleteUser("Sun Apr 09 09:50:20 CST 2017DlLDg")); //²âÊÔÉ¾³ýuser
+	//	System.out.println(d.deleteUser("Mon Apr 10 21:27:04 CST 2017F596m")); //²âÊÔÉ¾³ýuser
 		
 		
 /*		try{

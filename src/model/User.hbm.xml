@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-9 8:50:08 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-4-10 20:38:30 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.User" table="USER">
         <id name="UserID" type="java.lang.String">
@@ -9,13 +9,13 @@
             <generator class="assigned" />
         </id>
         <property name="UserName" type="java.lang.String">
-            <column name="USERNAME" />
+            <column name="USERNAME" unique="true"/>
         </property>
         <property name="UserTel" type="java.lang.String">
-            <column name="USERTEL" unique="true"/>
+            <column name="USERTEL"  unique="true"/>
         </property>
         <property name="UserEmail" type="java.lang.String">
-            <column name="USEREMAIL"  />
+            <column name="USEREMAIL" unique="true"/>
         </property>
         <property name="UserPassword" type="java.lang.String">
             <column name="USERPASSWORD" />
@@ -44,15 +44,11 @@
         <property name="UserHeadPortr" type="java.lang.String">
             <column name="USERHEADPORTR" />
         </property>
-        <set name="pictures" table="MARK" cascade="all" lazy="false">
-            <key><column name="RUSERID" /></key>
-            <many-to-many class="model.Picture"  column="RPID" />
+        <set name="pictures" table="Mark" inverse="false" cascade="all" lazy="true">
+            <key>
+                <column name="RUSERID" />
+            </key>
+            <many-to-many class="model.Picture" column="RPID" />
         </set>
-        <!-- inverse表被动一方若置为true则表示关联关系又对方来维护   lazy表示是否延迟加载       cascade表示在操作时同时对关联表更新  -->
-        <!-- 多对多映射 -->
-        <!-- <set name="picture" table="mark"  cascade="all" inverse="true">
-        <key column="RUSERID"></key>
-        <many-to-many class="model.Picture" column="RPICTUREID"></many-to-many>
-        </set> -->
     </class>
 </hibernate-mapping>

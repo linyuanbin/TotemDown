@@ -8,7 +8,8 @@ public class Picture {
 
 	private String PID; //图片id
 	private String PName; //图片文件名字
-	private String PAddress;
+	private String PAddress; 
+	private String MarkName; 
 	private String FinalMarkName; //最终标签
 	private Date FinalTime; //确定最终标签时间
 	private Set<User> Users=new HashSet<User>(); //存储多对象User的数组set
@@ -46,6 +47,13 @@ public class Picture {
 		FinalTime = finalTime;
 	}
 	
+	
+	public String getMarkName() {
+		return MarkName;
+	}
+	public void setMarkName(String markName) {
+		MarkName = markName;
+	}
 	public Set<User> getUsers() {
 		return Users;
 	}
@@ -53,7 +61,15 @@ public class Picture {
 		Users = users;
 	}
 	
-	
+	/*
+	 *  <!-- 多对多关系映射 -->
+        <set name="Users" table="MARK" inverse="true" lazy="false">
+            <key>
+                <column name="RPID" />
+            </key>
+            <many-to-many class="model.User"  column="RUSERID"/>
+        </set>
+	 */
 	
 	
 }

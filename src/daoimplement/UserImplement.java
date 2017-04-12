@@ -38,6 +38,7 @@ public class UserImplement implements UserDao {
 
 		} catch (Exception e) {
 			System.out.println(e);
+			SessionAnnotation.closeSession();
 			return false;
 		}
 		}//else

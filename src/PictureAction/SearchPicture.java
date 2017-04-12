@@ -86,17 +86,16 @@ public class SearchPicture {
 	}
 
 	public static DirectoryStream<Path> getAllfile(String path) throws IOException {
-		DirectoryStream<Path> paths=null;
-//		File f = null;
-//		f = new File(path);
-//		File[] files = f.listFiles(); // 得到f文件夹下面的所有文件。
-//		// List<File> list = new ArrayList<File>();
-//		for (File file : files) {
-//			if (file.isDirectory()) {
-//				// 如何当前路劲是文件夹，则循环读取这个文件夹下的所有文件
-//				getAllfile(file.getAbsolutePath());
-//			} else {
-//				// list.add(file);
+		DirectoryStream<Path> paths = null;
+		File f = null;
+		f = new File(path);
+		File[] files = f.listFiles(); // 得到f文件夹下面的所有文件。
+
+		for (File file : files) {
+			if (file.isDirectory()) {
+				// 如何当前路劲是文件夹，则循环读取这个文件夹下的所有文件
+				getAllfile(file.getAbsolutePath());
+			} else {
 				Path dir = Paths.get(path);
 				assert Files.exists(dir) && Files.isDirectory(dir);
 				paths = Files.newDirectoryStream(dir, new DirectoryStream.Filter<Path>() {
@@ -105,8 +104,32 @@ public class SearchPicture {
 								&& file.getFileName().toString().matches("^.*[.](?i:jpg|png|bmg|gif|img)$");
 					}
 				});
-//			}
-//		}
+			}
+		}
+		return paths;
+	}
+
+	public static DirectoryStream<Path> getAllfileFList(String path) throws IOException {
+		DirectoryStream<Path> paths = null;
+		File f = null;
+		f = new File(path);
+		File[] files = f.listFiles(); // 得到f文件夹下面的所有文件。
+
+		for (File file : files) {
+			if (file.isDirectory()) {
+				// 如何当前路劲是文件夹，则循环读取这个文件夹下的所有文件
+				getAllfile(file.getAbsolutePath().toString());
+			} else {
+				Path dir = Paths.get(path);
+				assert Files.exists(dir) && Files.isDirectory(dir);
+				paths = Files.newDirectoryStream(dir, new DirectoryStream.Filter<Path>() {
+					public boolean accept(Path file) {
+						return Files.isRegularFile(file)
+								&& file.getFileName().toString().matches("^.*[.](?i:jpg|png|bmg|gif|img)$");
+					}
+				});
+			}
+		}
 		return paths;
 	}
 

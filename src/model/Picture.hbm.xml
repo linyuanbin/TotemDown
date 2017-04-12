@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-9 8:50:08 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-4-10 20:38:30 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.Picture" table="PICTURE">
         <id name="PID" type="java.lang.String">
-            <column name="PID" />
+            <column name="PID" unique="true"/>
             <generator class="assigned" />
         </id>
         <property name="PName" type="java.lang.String">
-            <column name="PNAME" unique="false" />
+            <column name="PNAME"  unique="true"/>
         </property>
         <property name="PAddress" type="java.lang.String">
             <column name="PADDRESS" />
+        </property>
+        <property name="MarkName" type="java.lang.String">
+            <column name="MARKNAME" />
         </property>
         <property name="FinalMarkName" type="java.lang.String">
             <column name="FINALMARKNAME" />
@@ -20,7 +23,6 @@
         <property name="FinalTime" type="java.util.Date">
             <column name="FINALTIME" />
         </property>
-        <!-- 多对多关系映射 -->
         <set name="Users" table="MARK" inverse="true" lazy="false">
             <key>
                 <column name="RPID" />
