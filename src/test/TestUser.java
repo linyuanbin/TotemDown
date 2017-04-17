@@ -19,11 +19,12 @@ import util.RandomString;
 
 public class TestUser {
 	
+	UserDao d=new UserImplement(); 
 		
 	@Test
 	public void testuser() throws ParseException{
 		
-		UserDao d=new UserImplement(); 
+		
 		 //模仿注册
 	/*	User u=new User();
 		u.setUserName("网迦");
@@ -68,7 +69,7 @@ public class TestUser {
 		*/
 		
 		
-		/*Session session=SessionAnnotation.getSession(); //测试显示用户方法
+	/*	Session session=SessionAnnotation.getSession(); //测试显示用户方法
 		String sql="select UserID from User";
 		List list=session.createQuery(sql).list();
 		for(int i=0;i<list.size();i++){
@@ -79,31 +80,31 @@ public class TestUser {
 		
 		
 		//测试关联关系
-/*		User u1=new User();
-		u1.setUserName("二狗子"); 
-		u1.setUserHeadPortr("世界次");
+	/*	User u1=new User();
+		u1.setUserName("三狗子"); 
+		u1.setUserHeadPortr("是三生三世次");
 		u1.setUserIntegral(6);
 		u1.setUserMajor("JAVA工程师");
 		u1.setUserPassword("666666"); 
 		u1.setUserBirthday(SimpleDateFormatUtil.getSimpleDateFormat("1998-9-1"));
-		u1.setUserTel("13244236888");  
+		u1.setUserTel("13244236811");  
 		User u2=new User();
-		u2.setUserName("大狗子"); 
+		u2.setUserName("四狗子"); 
 		u2.setUserHeadPortr("世界次");
 		u2.setUserIntegral(6);
 		u2.setUserMajor("web工程师");
 		u2.setUserPassword("666666"); 
 		u2.setUserBirthday(SimpleDateFormatUtil.getSimpleDateFormat("1998-9-2"));
-		u2.setUserTel("13244236866");  
+		u2.setUserTel("13244236877");  
 		
 		Picture p1=new Picture();
 		p1.setPID(new Date()+RandomString.getRandomString(5));
-	    p1.setPName("餐厅");	
+	    p1.setPName("餐");	
 	    p1.setPAddress("D:\\picture\\two.jpg");
 	    
 		Picture p2=new Picture();
 		p2.setPID(new Date()+RandomString.getRandomString(5));
-	    p2.setPName("广场");	
+	    p2.setPName("广");	
 	    p2.setPAddress("D:\\picture\\wwpp.jpg");
 		
 	    u1.getPictures().add(p1);
@@ -111,43 +112,35 @@ public class TestUser {
 	    u2.getPictures().add(p1);
 	    d.register(u1); //注册
 	    d.register(u2);//注册
-*/	    
-	    
-//		
-		Picture p2=new Picture();
-		p2.setPID(new Date()+RandomString.getRandomString(5));
-	    p2.setPName("shijia");	
-	    p2.setPAddress("D:\\picture\\wwpp.jpg"); 
-		User u2=d.showUser("Mon Apr 10 21:27:04 CST 2017F596m"); 
-		if(u2.getPictures()==null){
-			System.out.println("yes");
-		}else{
-			System.out.println("no");
-		}
-		System.out.println(u2.getUserName());
-		System.out.println(u2.getPictures());
-		u2.getPictures().add(p2);
-	    System.out.println(u2.getUserEmail()+"邮件");
-	    d.updateUser(u2);
-	    System.out.println(u2.getUserMajor()+"工作");
-	    
-//	    
-//		System.out.println("picture");     //关联表查询
-//	    //String uid=d.getUserID("13244236888"); 
-//	    User u3=d.showUser("Mon Apr 10 18:23:42 CST 2017d5YGb");  
-//	    //User u3=d.showUser(uid); 
-//	    //System.out.println(uid); 
-//	    Set<Picture> ss = u3.getPictures(); 
-//		System.out.println("picture"); 
-//	    for (Picture picture : ss) { 
-//			System.out.println(picture); 
-//			System.out.println(picture.getPAddress()+" "+picture.getPName()); 
-//		}
-//		
-	    
+	    */
 	    
 		
-	//	System.out.println(d.deleteUser("Mon Apr 10 21:27:04 CST 2017F596m")); //测试删除user
+//		Picture p2=new Picture();
+//		p2.setPID(new Date()+RandomString.getRandomString(5));
+//	    p2.setPName("shijia");	
+//	    p2.setPAddress("D:\\picture\\wwpp.jpg"); 
+//		User u2=d.showUser("Mon Apr 10 21:27:04 CST 2017F596m"); 
+//		if(u2.getPictures()==null){
+//			System.out.println("yes");
+//		}else{
+//			System.out.println("no");
+//		}
+//		System.out.println(u2.getUserName());
+//		System.out.println(u2.getPictures());
+//		u2.getPictures().add(p2);
+//	    System.out.println(u2.getUserEmail()+"邮件");
+//	    d.updateUser(u2);
+//	    System.out.println(u2.getUserMajor()+"工作");
+	    
+//	    
+		
+	
+		
+		//System.out.println(d.deleteUser("Mon Apr 10 21:27:04 CST 2017EkBVm")); //测试删除user
+		
+		/*User u=d.showUser("Mon Apr 10 21:27:04 CST 2017EkBVm");  //测试更新用户
+		u.setUserNickName("你粗恶魔那个");
+		d.updateUser(u);*/
 		
 		
 /*		try{
@@ -166,9 +159,31 @@ public class TestUser {
 			
 		}*/
 	    
-	  
-	    
 	}
 
+	@Test
+	public void testUserPictures(){
+		System.out.println("picture1");     //关联表查询  
+	    //String uid=d.getUserID("13244236888");  
+	    User u3=d.showUser("Thu Apr 13 19:24:52 CST 2017b3H2V");   
+		//User u3=d.selectUser("三狗子"); 
+	    
+	    System.out.println(u3.getUserName());   
+	    Set<Picture> pictures=u3.getPictures(); 
+	    System.out.println("pictures是空"+pictures); 
+		System.out.println("picture2"+" "+pictures.size());  
+	    for (Picture picture : pictures) { 
+			System.out.println(picture+"pic"); 
+			System.out.println(picture.getPAddress()+" "+picture.getPName()); 
+		}
+	    
+//		Session session=SessionAnnotation.getSession();
+//		User user=(User) session.get(User.class, "Thu Apr 13 19:24:52 CST 2017b3H2V");
+//		Set<Picture> pictures=user.getPictures();  
+//		 for (Picture picture : pictures) { 
+//				System.out.println(picture+"pic"); 
+//				System.out.println(picture.getPAddress()+" "+picture.getPName()); 
+//			}
+	}
 
 }

@@ -61,13 +61,13 @@ public class UserImplement implements UserDao {
 		session.beginTransaction();
 		List list=session.createQuery(sql).list();
 		if(list.isEmpty()){
-			 session.getTransaction().commit();
+			 //session.getTransaction().commit();
 		SessionAnnotation.closeSession();
 		return null;
 	      }
-		String userId=(String) list.iterator().next();
-		 session.getTransaction().commit();
-		SessionAnnotation.closeSession();
+		String userId=(String) list.iterator().next(); 
+		 session.getTransaction().commit(); 
+		SessionAnnotation.closeSession(); 
 	return userId;
 	}
 
@@ -114,15 +114,20 @@ public class UserImplement implements UserDao {
 	
 		}else{
 			sql="select UserID from User where UserName='"+UserName+"'"; 
-		}
+		} 
 		session.beginTransaction();
-		List list=session.createQuery(sql).list();
+		List list=session.createQuery(sql).list(); 
+		System.out.println(list);
 		if(!list.isEmpty()){ //Èç¹û²»¿Õ
-			User user=(User)list.iterator().next();
-			session.getTransaction().commit();
+			//User user=(User)list.iterator().next(); 
+			String uid=list.toString(); 
+			User user=(User) session.get(User.class,uid); 
+			System.out.println("selectUser"+user.getUserName());
+			session.getTransaction().commit(); 
 			SessionAnnotation.closeSession();
 			return user;
 		}
+		//session.getTransaction().commit(); 
 		SessionAnnotation.closeSession();
 		return null;
 	}
@@ -144,13 +149,15 @@ public class UserImplement implements UserDao {
 
 	@Override
 	public User showUser(String UserID) {
+	
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
 		User user=(User)session.get(User.class,UserID);
 		session.getTransaction().commit();
-		session.flush();
+		//session.flush();
 		SessionAnnotation.closeSession();
 		return user;
+		
 	}
 
 	@Override
@@ -178,7 +185,4 @@ public class UserImplement implements UserDao {
 	
 	
 	
-	
-	
-
 }

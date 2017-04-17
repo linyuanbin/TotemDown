@@ -46,9 +46,9 @@
         </property>
         
         <!-- 多对多映射 -->
-        <!-- <set name="picture" table="mark"  cascade="all" inverse="true">
+        <set name="picture" table="mark"  cascade="all" inverse="true">
         <key column="RUSERID"></key>
         <many-to-many class="model.Picture" column="RPICTUREID"></many-to-many>
-        </set> -->
+        </set>
     </class>
 </hibernate-mapping>

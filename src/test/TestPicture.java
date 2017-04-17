@@ -21,12 +21,12 @@ import model.Picture;
 public class TestPicture {
 
 	private static PictureDao pd = new PictureImplement();
-	private String mPath = "F:\\picture";// \\餐厅
+	private String mPath = "F:\\picture\\photo";// \\餐厅
 
 	@Test
 	public void testPicture() { // 测试文件收索方法
-		Vector<String> pictures = SearchPicture.SearchPName("C:\\Users\\lin\\Pictures");// ("c:"+System.getProperty("file.separator")
-		Vector<String> picturesPath = SearchPicture.SearchPPath("C:\\Users\\lin\\Pictures");
+		Vector<String> pictures = SearchPicture.SearchPName("F:\\picture\\photo");// ("c:"+System.getProperty("file.separator")
+		Vector<String> picturesPath = SearchPicture.SearchPPath("F:\\picture\\photo");
 		// +"Pictures");
 		File file = new File("D:\\Mypicture");
 		String writePath = "D:\\Mypicture\\";
@@ -96,6 +96,8 @@ public class TestPicture {
 		 * s.getTransaction().commit(); System.out.println(p.getPName());
 		 * System.out.println(li); }
 		 */
+		
+		
 
 	}
 

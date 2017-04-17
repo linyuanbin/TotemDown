@@ -9,7 +9,7 @@ import hibernateutil.SessionAnnotation;
 import model.Picture;
 import util.RandomString;
 
-public class PictureUtil {
+public class PictureUtil {  //保存图片到数据库
 
 	public void savePicture2DB(Path p){
 		Session session=SessionAnnotation.getSession();
