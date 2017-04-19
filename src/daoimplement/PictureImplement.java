@@ -44,7 +44,6 @@ public class PictureImplement implements PictureDao {
 		return true;
 		}catch(Exception e){
 			System.out.println(e);
-			session.getTransaction().commit();
 			SessionAnnotation.closeSession();
 			return false;
 		}
@@ -54,7 +53,7 @@ public class PictureImplement implements PictureDao {
 	public boolean deletePicture(String PID) {  //删除图片
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
-		String sql="select PID from Picture where PID='"+PID+"'";  //擦看是否存在用户
+		String sql="select PID from Picture where PID='"+PID+"'";  //擦看是否存在该图片
 		List list=session.createQuery(sql).list();
 		
 		if(list.isEmpty()){ //如果空则说明不存在
@@ -71,7 +70,7 @@ public class PictureImplement implements PictureDao {
 	}
 
 	@Override
-	public Set<Picture> selectAllPicture() {  //返回数据库中所有的图片对象
+	public Set<Picture> selectAllPicture() {  //返回数据库中所有的图片对象     测试成功
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
 		Set<Picture> pictures=new HashSet<Picture>();
@@ -90,7 +89,7 @@ public class PictureImplement implements PictureDao {
 	}
 
 	@Override
-	public Picture selectSinglePictureFID(String PID) {
+	public Picture selectSinglePictureFID(String PID) {  //ID查询图片
 		
 		try{
 			Session session=SessionAnnotation.getSession();
@@ -108,7 +107,7 @@ public class PictureImplement implements PictureDao {
 	}
 
 	@Override
-	public Set<Picture> selectPicturesFN(String PName) {  //查找名字匹配的多有图片
+	public Set<Picture> selectPicturesFN(String PName) {  //查找名字匹配相似图片
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
 		Set<Picture> pictures=new HashSet<Picture>();
@@ -124,11 +123,11 @@ public class PictureImplement implements PictureDao {
 	}
 
 	@Override
-	public Set<Picture> selectPicturesFM(String pMark) {
+	public Set<Picture> selectPicturesFM(String pMark) {  
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
 		Set<Picture> pictures=new HashSet<Picture>(); 
-		String sql="select PID from Picture where PMARK like '%"+pMark+"%'"; 
+		String sql="select PID from Picture where MarkName like '%"+pMark+"%'"; 
 		List<String> list=session.createQuery(sql).list(); 
 		for(String li:list){ 
 			Picture p=(Picture)session.get(Picture.class,li); 

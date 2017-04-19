@@ -96,9 +96,16 @@ public class TestPicture {
 		 * s.getTransaction().commit(); System.out.println(p.getPName());
 		 * System.out.println(li); }
 		 */
-		
-		
 
 	}
+	
+	@Test
+	public void selectAllPictureOnDB(){
+		Set<Picture> pictures= pd.selectPicturesFM("²Í"); //pd.selectAllPicture();
+		for(Picture p:pictures){
+			System.out.println(p.getPAddress()+" "+p.getMarkName());
+		}
+	}
+	
 
 }

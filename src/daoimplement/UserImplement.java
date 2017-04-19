@@ -152,7 +152,7 @@ public class UserImplement implements UserDao {
 	
 		Session session=SessionAnnotation.getSession();
 		session.beginTransaction();
-		User user=(User)session.get(User.class,UserID);
+		User user=(User)session.get(User.class,UserID); 
 		session.getTransaction().commit();
 		//session.flush();
 		SessionAnnotation.closeSession();
@@ -163,6 +163,7 @@ public class UserImplement implements UserDao {
 	@Override
 	public String getUserID(String UserName) {
 		Session session=SessionAnnotation.getSession();
+		session.beginTransaction();
 		String sql;
 		if(ValidatorUserNameUtil.isEmail(UserName)){
 			sql="select UserID from User where UserEmail='"+UserName+"'";
@@ -172,9 +173,10 @@ public class UserImplement implements UserDao {
 		}else{
 			sql="select UserID from User where UserName='"+UserName+"'"; 
 		}
-		session.beginTransaction();
-		//List list=session.createQuery(sql).list();
-		String userid=session.createQuery(sql).toString();
+		List list=session.createQuery(sql).list();
+		String userid=(String) list.iterator().next(); 
+		//String userid=session.createQuery(sql).toString();
+		session.getTransaction().commit();
 		if(userid.isEmpty()){
 			SessionAnnotation.closeSession();
 			return null;

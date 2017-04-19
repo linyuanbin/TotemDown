@@ -21,6 +21,16 @@ public class User {
 	private String UserUnderWrite;//签名
 	private String UserHobby; //爱好
 	private String UserHeadPortr;//用户头像
+	private String state;
+	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	//存储多对象图片的数组set
 	private Set<Picture> pictures=new HashSet<>();
 	//private String User_WeChat; //微信号
