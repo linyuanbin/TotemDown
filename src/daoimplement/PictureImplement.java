@@ -122,21 +122,6 @@ public class PictureImplement implements PictureDao {
 		return pictures;
 	}
 
-	@Override
-	public Set<Picture> selectPicturesFM(String pMark) {  
-		Session session=SessionAnnotation.getSession();
-		session.beginTransaction();
-		Set<Picture> pictures=new HashSet<Picture>(); 
-		String sql="select PID from Picture where MarkName like '%"+pMark+"%'"; 
-		List<String> list=session.createQuery(sql).list(); 
-		for(String li:list){ 
-			Picture p=(Picture)session.get(Picture.class,li); 
-			pictures.add(p); 
-		}
-		session.getTransaction().commit(); 
-		SessionAnnotation.closeSession(); 
-		return pictures;
-	}
 
 	@Override
 	public Picture selectSinglePictureFN(String Pname) { 

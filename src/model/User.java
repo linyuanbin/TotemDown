@@ -22,6 +22,10 @@ public class User {
 	private String UserHobby; //爱好
 	private String UserHeadPortr;//用户头像
 	private String state;
+	//存储多对象图片的数组set
+	private Set<Picture> pictures=new HashSet<>();
+	//private String User_WeChat; //微信号
+	
 	
 	public String getState() {
 		return state;
@@ -31,10 +35,7 @@ public class User {
 		this.state = state;
 	}
 
-	//存储多对象图片的数组set
-	private Set<Picture> pictures=new HashSet<>();
-	//private String User_WeChat; //微信号
-	
+
 	private static int a=0;
 
 	

@@ -21,39 +21,50 @@ import model.Picture;
 public class TestPicture {
 
 	private static PictureDao pd = new PictureImplement();
-	private String mPath = "F:\\picture\\photo";// \\餐厅
+	//private String mPath = "F:\\picture\\photo";// \\餐厅
+	private String mPath="C:\\nginx\\html\\photo";
 
 	@Test
 	public void testPicture() { // 测试文件收索方法
-		Vector<String> pictures = SearchPicture.SearchPName("F:\\picture\\photo");// ("c:"+System.getProperty("file.separator")
-		Vector<String> picturesPath = SearchPicture.SearchPPath("F:\\picture\\photo");
 		// +"Pictures");
 		File file = new File("D:\\Mypicture");
 		String writePath = "D:\\Mypicture\\";
 		String readPath = "C:\\Users\\lin\\Pictures\\";
+	/*	Vector<String> pictures = SearchPicture.SearchPName("F:\\picture\\photo");// ("c:"+System.getProperty("file.separator")
 		for (String fileName : pictures) { // 这里的fileName其实是绝对路径
 			File f = new File(fileName.toString());
 			System.out.println(fileName);
 			// save(readPath + fileName, writePath + fileName);
-		}
+		}*/
+		
+		/*Vector<String> picturesPath = SearchPicture.SearchPPath("F:\\picture\\photo");
 		for (String fileName : picturesPath) { // 这里的fileName其实是绝对路径
 			File f = new File(fileName.toString());
 			System.out.println(fileName);
 			// save(readPath + fileName, writePath + fileName);
-		}
+		}*/
 	}
 
-	@Test
-	public void testPath() throws IOException { // 测试获取对象数组
+	@Test   //将所有图片加载到数据库
+	public void testAdd() throws IOException { // 测试获取对象数组
 
 		DirectoryStream<Path> paths = SearchPicture.GetPath(mPath);
-
+		
+		Picture picture=new Picture();
 		for (Path p : paths) {
 			System.out.println(p.toString() + "-----" + p.getFileName().toString());
+			picture.setPName(p.getFileName().toString());
+			picture.setPAddress(p.toString());
+			try{
+			pd.AddPicture(picture);
+			
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		}
 	}
 
-	@Test
+	/*@Test
 	public void testGetAllFile() throws IOException { // 从服务器读取
 
 		DirectoryStream<Path> paths = SearchPicture.getAllfileFList(mPath);
@@ -64,7 +75,7 @@ public class TestPicture {
 
 		}
 	}
-
+*/
 	@Test
 	public void testGetAPicture() { // 从数据库获得
 
@@ -101,9 +112,9 @@ public class TestPicture {
 	
 	@Test
 	public void selectAllPictureOnDB(){
-		Set<Picture> pictures= pd.selectPicturesFM("餐"); //pd.selectAllPicture();
+		Set<Picture> pictures= pd.selectPicturesFN("餐"); //pd.selectAllPicture();
 		for(Picture p:pictures){
-			System.out.println(p.getPAddress()+" "+p.getMarkName());
+			System.out.println(p.getPAddress());
 		}
 	}
 	

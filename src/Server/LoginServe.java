@@ -31,10 +31,7 @@ public class LoginServe extends HttpServlet {
 
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		// request.setCharacterEncoding("utf-8");
-		// response.setContentType("text/html");
-		// response.setContentType("text/html;charset=utf8"); //解决中文乱码
-		// 必须写在得到流之前gbk
+	
 		String username = new String(request.getParameter("username").getBytes("iso-8859-1"), "utf-8");
 		// String username = request.getParameter("username");
 		// username = new String(username.getBytes("iso-8859-1"),"utf-8”);
@@ -43,16 +40,25 @@ public class LoginServe extends HttpServlet {
 
 		PrintWriter out = response.getWriter(); // 通过response得到字节输出流
 		String msg = null;
+		
+		////////////////////////////////////
+		
+		/////////////////////////////////
+		
 		if (username != null && username.equals("lin") && password != null && password.equals("123")) {
 			
-			System.out.print("登录成功！");
-			msg = "http://imgstore04.cdn.sogou.com/app/a/100520024/877e990117d6a7ebc68f46c5e76fc47a";
-			out.write(msg);
+			System.out.print("登录成四川省功了！");
+			//msg = "http://imgstore04.cdn.sogou.com/app/a/100520024/877e990117d6a7ebc68f46c5e76fc47a";
+//			msg="http://192.168.0.18/photo/街道13.jpg";
+//			out.write(msg);
+			
 			BufferedReader br = request.getReader();
 			String str1 = null;
 			StringBuilder resource = new StringBuilder();
+			System.out.println("resource"+resource.toString());
 			while ((str1 = br.readLine()) != null) // 判断最后一行不存在，为空结束循环
 			{
+				System.out.println("解析");
 				resource.append(str1);
 				System.out.println(str1);// 原样输出读到的内容
 			}
@@ -66,7 +72,7 @@ public class LoginServe extends HttpServlet {
 				String UserId = d.login(u.getUserName(), u.getUserPassword());
 				System.out.println("密码正确 用户ID" + UserId);
 				msg=UserId;
-				out.write(msg);  //登录是向用户反馈UserId
+//				out.write(msg);  //登录是向用户反馈UserId
 			} else if (u.getState().equals("register")) {     // 注册
 				boolean b = d.register(u);
 				System.out.println("注册情况：" + b);
@@ -78,10 +84,10 @@ public class LoginServe extends HttpServlet {
 					out.write(msg);
 				}
 			} else if (u.getState().equals("update")) {        // 更新用户
-				/*
-				 * String UserId=d.getUserID(u.getUserTel());
-				 * System.out.println("查询用户id"+UserId);
-				 */
+				
+				  String UserId=d.getUserID(u.getUserTel());
+				  System.out.println("查询用户id"+UserId);
+				 
 				d.updateUser(u);
 				System.out.println("用户生日：" + u.getUserBirthday().toLocaleString());
 			}else if(u.getState().equals("request  ")){        //推送请求
@@ -92,6 +98,7 @@ public class LoginServe extends HttpServlet {
 				Picture p=CreateJson.getPicture(resource.toString());
 				user.getPictures().add(p);
 			}
+			
 
 		} else {
 			msg = "LoginFail";

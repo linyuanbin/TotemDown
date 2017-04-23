@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-10 20:38:30 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-4-23 18:19:28 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.Picture" table="PICTURE">
         <id name="PID" type="java.lang.String">
-            <column name="PID" unique="true"/>
+            <column name="PID" />
             <generator class="assigned" />
         </id>
         <property name="PName" type="java.lang.String">
-            <column name="PNAME"  unique="true"/>
+            <column name="PNAME" />
         </property>
         <property name="PAddress" type="java.lang.String">
             <column name="PADDRESS" />
-        </property>
-        <property name="MarkName" type="java.lang.String">
-            <column name="MARKNAME" />
         </property>
         <property name="FinalMarkName" type="java.lang.String">
             <column name="FINALMARKNAME" />
@@ -23,11 +20,11 @@
         <property name="FinalTime" type="java.util.Date">
             <column name="FINALTIME" />
         </property>
-        <set name="Users" table="MARK" inverse="true" lazy="false">
+        <set name="Users" table="USER" inverse="false" lazy="true">
             <key>
-                <column name="RPID" />
+                <column name="PID" />
             </key>
-            <many-to-many class="model.User"  column="RUSERID"/>
+            <one-to-many class="model.User" />
         </set>
     </class>
 </hibernate-mapping>

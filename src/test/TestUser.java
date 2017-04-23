@@ -9,7 +9,9 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.junit.Test;
 
+import dao.PictureDao;
 import dao.UserDao;
+import daoimplement.PictureImplement;
 import daoimplement.UserImplement;
 import hibernateutil.SessionAnnotation;
 import hibernateutil.SimpleDateFormatUtil;
@@ -80,7 +82,7 @@ public class TestUser {
 		
 		
 		//测试关联关系
-	/*	User u1=new User();
+		User u1=new User();
 		u1.setUserName("三狗子"); 
 		u1.setUserHeadPortr("是三生三世次");
 		u1.setUserIntegral(6);
@@ -99,7 +101,7 @@ public class TestUser {
 		
 		Picture p1=new Picture();
 		p1.setPID(new Date()+RandomString.getRandomString(5));
-	    p1.setPName("餐");	
+	    p1.setPName("");	
 	    p1.setPAddress("D:\\picture\\two.jpg");
 	    
 		Picture p2=new Picture();
@@ -107,12 +109,12 @@ public class TestUser {
 	    p2.setPName("广");	
 	    p2.setPAddress("D:\\picture\\wwpp.jpg");
 		
-	    u1.getPictures().add(p1);
+	   /* u1.getPictures().add(p1);
 	    u1.getPictures().add(p2);
-	    u2.getPictures().add(p1);
+	    u2.getPictures().add(p1);*/
 	    d.register(u1); //注册
 	    d.register(u2);//注册
-	    */
+	    
 	    
 		
 //		Picture p2=new Picture();
@@ -185,5 +187,17 @@ public class TestUser {
 //				System.out.println(picture.getPAddress()+" "+picture.getPName()); 
 //			}
 	}
+	
+
+	 
+	 @Test 
+	 public void TestMarkTable(){
+		 Session session=SessionAnnotation.getSession();
+		 String sql="insert into mark values ("+"'Thu Apr 20 19:00:32 CST 2017Qti3c',"+"'Thu Apr 20 19:05:32 CST 2017m71lZ')";
+		 session.beginTransaction();
+		 session.createQuery(sql);
+		 session.getTransaction().commit();
+		 SessionAnnotation.closeSession();
+	 }
 
 }

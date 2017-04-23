@@ -19,7 +19,7 @@ import model.Picture;
 
 public class SearchPicture {
 
-	public static Vector<String> SearchPName(String path) { // 获取文件名
+/*	public static Vector<String> SearchPName(String path) { // 获取文件名
 		// get all the picture-files name from dir(path)
 		Vector<String> pictures = new Vector<>();// 保存文件名称数组
 		Path dir = Paths.get(path);
@@ -43,9 +43,9 @@ public class SearchPicture {
 		}
 
 		return pictures;
-	}
+	}*/
 
-	public static Vector<String> SearchPPath(String path) { // 获取文件路径
+	/*public static Vector<String> SearchPPath(String path) { // 获取文件路径
 		// get all the picture-files name from dir(path)
 		Vector<String> paths = new Vector<>();// 保存文件绝对路径
 		Path dir = Paths.get(path);
@@ -68,7 +68,7 @@ public class SearchPicture {
 
 		return paths;
 	}
-
+*/
 	public static DirectoryStream<Path> GetPath(String path) throws IOException { // 获取文件路径
 		// get all the picture-files name from dir(path)
 		Vector<String> paths = new Vector<>();// 保存文件绝对路径
@@ -109,7 +109,7 @@ public class SearchPicture {
 		return paths;
 	}
 
-	public static DirectoryStream<Path> getAllfileFList(String path) throws IOException {
+/*	public static DirectoryStream<Path> getAllfileFList(String path) throws IOException {
 		DirectoryStream<Path> paths = null;
 		File f = null;
 		f = new File(path);
@@ -132,7 +132,7 @@ public class SearchPicture {
 		}
 		return paths;
 	}
-
+*/
 	public static void save(String readpath, String writepath) throws Exception { // 保存图片到服务器
 		FileInputStream in = new FileInputStream(readpath); // "C:/Users/Administrator/Desktop/1.jpg"
 		FileOutputStream out = new FileOutputStream(writepath); // "e:/2.jpg"

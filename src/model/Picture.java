@@ -9,7 +9,6 @@ public class Picture {
 	private String PID; //图片id
 	private String PName; //图片文件名字
 	private String PAddress; 
-	private String MarkName; 
 	private String FinalMarkName; //最终标签
 	private Date FinalTime; //确定最终标签时间
 	private Set<User> Users=new HashSet<User>(); //存储多对象User的数组set
@@ -47,13 +46,6 @@ public class Picture {
 		FinalTime = finalTime;
 	}
 	
-	
-	public String getMarkName() {
-		return MarkName;
-	}
-	public void setMarkName(String markName) {
-		MarkName = markName;
-	}
 	public Set<User> getUsers() {
 		return Users;
 	}

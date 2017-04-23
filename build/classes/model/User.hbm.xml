@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-10 20:38:30 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-4-23 18:19:28 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.User" table="USER">
         <id name="UserID" type="java.lang.String">
@@ -9,13 +9,13 @@
             <generator class="assigned" />
         </id>
         <property name="UserName" type="java.lang.String">
-            <column name="USERNAME" unique="true"/>
+            <column name="USERNAME" />
         </property>
         <property name="UserTel" type="java.lang.String">
-            <column name="USERTEL"  unique="true"/>
+            <column name="USERTEL" />
         </property>
         <property name="UserEmail" type="java.lang.String">
-            <column name="USEREMAIL" unique="true"/>
+            <column name="USEREMAIL" />
         </property>
         <property name="UserPassword" type="java.lang.String">
             <column name="USERPASSWORD" />
@@ -44,11 +44,14 @@
         <property name="UserHeadPortr" type="java.lang.String">
             <column name="USERHEADPORTR" />
         </property>
-        <set name="pictures" table="Mark" inverse="false" cascade="all" lazy="true">
+        <property name="state" type="java.lang.String">
+            <column name="STATE" />
+        </property>
+        <set name="pictures" table="PICTURE" inverse="false" lazy="true">
             <key>
-                <column name="RUSERID" />
+                <column name="USERID" />
             </key>
-            <many-to-many class="model.Picture" column="RPID" />
+            <one-to-many class="model.Picture" />
         </set>
     </class>
 </hibernate-mapping>
